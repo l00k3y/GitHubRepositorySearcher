@@ -4,25 +4,21 @@ import PropTypes from 'prop-types';
 
 import './resultsGrid.css';
 
-function ResultsGrid({ resultData }) {
+function ResultsGrid({ resultData, handleRowClick }) {
   const [renderedRows, setRenderedRows] = useState([]);
 
   const columns = [
-    { field: 'id', hide: true },
+    { field: 'id' },
     { field: 'name', headerName: 'Name', width: 200 },
     { field: 'author', headerName: 'Author', width: 150 },
-    { field: 'forks', headerName: 'Forks', width: 75 },
-    { field: 'stars', headerName: 'Stars', width: 75 },
-    { field: 'link', headerName: 'URL', width: 400 },
+    { field: 'link', headerName: 'URL', width: 500 },
   ];
 
   const renderGridRows = () => {
     const rows = resultData.map((entry) => ({
       id: entry.id,
       name: entry.name,
-      forks: entry.forks,
       author: entry.owner.login,
-      stars: entry.stargazers_count,
       link: entry.html_url,
     }));
     setRenderedRows(rows);
@@ -34,13 +30,23 @@ function ResultsGrid({ resultData }) {
 
   return (
     <div id="search-results">
-      <DataGrid className="fullscreen" rows={renderedRows} columns={columns} />
+      <DataGrid
+        onRowClick={handleRowClick}
+        className="fullscreen"
+        rows={renderedRows}
+        columns={columns}
+        columnVisibilityModel={{
+          // Hide id column by default
+          id: false,
+        }}
+      />
     </div>
   );
 }
 
 ResultsGrid.propTypes = {
   resultData: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  handleRowClick: PropTypes.func.isRequired,
 };
 
 export default ResultsGrid;

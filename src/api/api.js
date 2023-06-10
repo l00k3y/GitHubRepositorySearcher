@@ -12,7 +12,8 @@ const getReadmeAPI = async (chosenRepo) => {
         accept: 'application/vnd.github.html',
       },
     });
-    return readmeRes;
+    if (readmeRes.data) return readmeRes.data;
+    return null;
   } catch (e) {
     throw new Error(e);
   }

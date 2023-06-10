@@ -14,7 +14,7 @@
     justify-content: center;
 }
 
-#search-button {
+#search-button, #clear-results-button {
     margin-left: 14px;
     height: 100%;
 }
