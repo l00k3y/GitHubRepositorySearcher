@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import PropTypes from 'prop-types';
 
+import './resultsGrid.css';
+
 function ResultsGrid({ resultData }) {
   const [renderedRows, setRenderedRows] = useState([]);
 
@@ -32,7 +34,7 @@ function ResultsGrid({ resultData }) {
 
   return (
     <div id="search-results">
-      <DataGrid sx={{ height: '800px', width: '100%' }} rows={renderedRows} columns={columns} autoPageSize />
+      <DataGrid className="fullscreen" rows={renderedRows} columns={columns} />
     </div>
   );
 }

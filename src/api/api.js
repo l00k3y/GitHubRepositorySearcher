@@ -12,14 +12,12 @@ const getReadmeAPI = async (chosenRepo) => {
         accept: 'application/vnd.github.html',
       },
     });
-    console.log(readmeRes.data);
+    return readmeRes;
   } catch (e) {
     throw new Error(e);
   }
 };
 const processSearchResults = async (responseItems) => {
-  console.log(responseItems.data.items);
-
   await getReadmeAPI(responseItems.data.items[0]);
   return responseItems.data.items;
 };

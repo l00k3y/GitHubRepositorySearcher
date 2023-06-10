@@ -7,25 +7,27 @@ import ResultsGrid from './components/resultsGrid/resultsGrid';
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
 
   const searchRepositories = async () => {
+    setResults([]);
     const repos = await getRepositoriesAPI(searchTerm);
     setResults(repos);
   };
 
   return (
     <div className="fullscreen">
-      <div>
+      <div id="search-repository">
         <TextField
+          tabIndex={0}
+          id="search-repository-input"
           label="Search Repository Name"
           value={searchTerm}
           onChange={(ev) => setSearchTerm(ev.target.value)}
         />
-        <Button onClick={searchRepositories}>Search</Button>
+        <Button id="search-button" onClick={searchRepositories}>Search</Button>
       </div>
 
-      <ResultsGrid resultData={results} />
+      {results.length > 0 ? <ResultsGrid resultData={results} /> : null }
     </div>
   );
 }
