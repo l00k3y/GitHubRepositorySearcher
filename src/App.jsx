@@ -1,12 +1,13 @@
 import { TextField, Button } from '@mui/material';
-// import { DataGrid } from '@mui/x-data-grid';
 import React, { useState } from 'react';
 import { getRepositoriesAPI } from './api/api';
 import './App.css';
+import ResultsGrid from './components/resultsGrid/resultsGrid';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const searchRepositories = async () => {
     const repos = await getRepositoriesAPI(searchTerm);
@@ -24,12 +25,7 @@ function App() {
         <Button onClick={searchRepositories}>Search</Button>
       </div>
 
-      <div>
-        {/* <DataGrid> */}
-
-        {JSON.stringify(results)}
-        {/* </DataGrid> */}
-      </div>
+      <ResultsGrid resultData={results} />
     </div>
   );
 }
