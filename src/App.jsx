@@ -1,38 +1,35 @@
 import { TextField, Button } from '@mui/material';
-import { Octokit } from 'octokit';
-import React, { useEffect, useState } from 'react';
+// import { DataGrid } from '@mui/x-data-grid';
+import React, { useState } from 'react';
+import { getRepositoriesAPI } from './api/api';
 import './App.css';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [octokit, setOctoKit] = useState(null);
+  const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    const newOctokit = new Octokit({});
-    setOctoKit(newOctokit);
-  });
-
-  const getRepositories = () => {
-    try {
-      octokit.request('GET /repositories', {
-        headers: {
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-      }).then((response) => console.log(response));
-    } catch (e) {
-      console.error(e);
-    }
+  const searchRepositories = async () => {
+    const repos = await getRepositoriesAPI(searchTerm);
+    setResults(repos);
   };
 
   return (
     <div className="fullscreen">
-      <TextField
-        label="Search Repository Name"
-        value={searchTerm}
-        onChange={(ev) => setSearchTerm(ev.target.value)}
-      />
-      <Button onClick={getRepositories}>Search</Button>
+      <div>
+        <TextField
+          label="Search Repository Name"
+          value={searchTerm}
+          onChange={(ev) => setSearchTerm(ev.target.value)}
+        />
+        <Button onClick={searchRepositories}>Search</Button>
+      </div>
 
+      <div>
+        {/* <DataGrid> */}
+
+        {JSON.stringify(results)}
+        {/* </DataGrid> */}
+      </div>
     </div>
   );
 }
