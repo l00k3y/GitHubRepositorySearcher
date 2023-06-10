@@ -16,6 +16,12 @@ Enter `npm start`
 This runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+## Usage
+
+To actually use this program, enter a search term in the repository name field and click search.
+
+A datagrid will display the results if any are found. Clicking on a row will display more information on the repository. Information such as: fork, issue and star counts. The readme, if one is found, is displayed too. 
+
 ## Future Improvements
 If I had more time to work on this project I would:
 
